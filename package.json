@@ -1,0 +1,23 @@
+{
+  "name": "kalkulator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndzelikaB/Kalkulator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndzelikaB/Kalkulator/issues"
+  },
+  "homepage": "https://github.com/AndzelikaB/Kalkulator#readme",
+  "description": ""
+}
