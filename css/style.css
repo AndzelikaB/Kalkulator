@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+html {
+    font-family: "Montserrat", sans-serif;
+}
+
+*,
+::after,
+::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    background: burlywood;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    height: 60vh;
+    min-width: 370px;
+}
+
+.display {
+    width: 100%;
+    min-height: 20%;
+    max-height: min-content;
+    background-color: rgba(29, 27, 27, 0.151);
+    box-shadow: 5px 5px 15px 7px #333333;
+    color: #fff;
+    word-break: break-all;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+.currentNumber {
+    font-size: 35px;
+}
+
+.previousNumber {
+    color: gray;
+    font-size: 20px;
+}
+
+.mathSign {
+    font-size: 20px;
+}
