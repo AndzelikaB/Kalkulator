@@ -1,0 +1,1 @@
+Calculator prepared on vanilla js
