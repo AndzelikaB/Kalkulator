@@ -1,34 +1,31 @@
-const currentNumber = document.querySelector('.currentNumber');
 const previousNumber = document.querySelector('.previousNumber p');
 const mathSign = document.querySelector('.mathSign');
-const numbersButtons = document.querySelectorAll('.number');
-const operatorsButtons = document.querySelectorAll('.operator');
-const equalsButton = document.querySelector('.equals');
-const clearButton = document.querySelector('.clear');
+const currentNumber = document.querySelector('.currentNumber');
+const buttonsOperator = document.querySelectorAll('.operator');
+const buttonClear = document.querySelector('.clear');
+const buttonsNumber = document.querySelectorAll('.number');
+const buttonEquals = document.querySelector('.equals');
+const buttonHistory = document.querySelector('.history-btn');
 const calculatorHistory = document.querySelector('.history');
-const historyBtn = document.querySelector('.history-btn');
-
 let result = '';
 
 function displayNumbers() {
-    if (this.textContent === "." && currentNumber.innerHTML.includes('.'))
-        return;
-
-    if (this.textContent === "." && currentNumber.innerHTML === '')
-        return currentNumber.innerHTML = ".0";
+    if (this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
+    if (this.textContent === '.' && currentNumber.innerHTML === '')
+        return currentNumber.innerHTML = '0.'
 
     currentNumber.innerHTML += this.textContent;
 }
 
 function operate() {
-    if (currentNumber.innerHTML === '' && this.textContent === '-')      // currentnumber - jesli pierwszej liczby nie ma  | textContent - jeśli klikniemy minus to 
-    {
+    if (currentNumber.innerHTML === '' && this.textContent === '-') {
         currentNumber.innerHTML = '-';
         return;
     }
     else if (currentNumber.innerHTML === '') {
         return;
     }
+
 
     if (mathSign.innerHTML !== '') {
         showResult();
@@ -37,40 +34,27 @@ function operate() {
     previousNumber.innerHTML = currentNumber.innerHTML;
     mathSign.innerHTML = this.textContent;
     currentNumber.innerHTML = '';
-
 }
 
 function showResult() {
-    if (previousNumber.innerHTML === '' || currentNumber.innerHTML === '') return currentNumber.innerHTML = "nie podano";
-
     let a = Number(currentNumber.innerHTML);
     let b = Number(previousNumber.innerHTML);
     let operator = mathSign.innerHTML;
 
     switch (operator) {
-        case '+':
-            result = a + b;
-            break;
-        case '-':
-            result = b - a;
-            break;
-        case 'x':
-            result = a * b;
-            break;
-        case ':':
-            result = b / a;
-            break;
-        case '2^':
-            result = b ** a;
-            break;
+        case '+': result = a + b; break;
+        case '-': result = b - a; break;
+        case 'x': result = a * b; break;
+        case ':': result = b / a; break;
+        case '2^': result = b ** a; break;
     }
-
-    addToHistory();
-    historyBtn.classList.add('active'); //pokazanie buttona z histori do czszczenia
-    currentNumber.innerHTML = result;
-    previousNumber.innerHTML = '';
-    mathSign.innerHTML = '';
-
+    if (previousNumber.innerHTML !== '' && currentNumber.innerHTML !== '') {
+        addToHistory();
+        buttonHistory.classList.add('active');
+        currentNumber.innerHTML = result;
+        previousNumber.innerHTML = '';
+        mathSign.innerHTML = '';
+    }
 }
 
 function addToHistory() {
@@ -78,7 +62,12 @@ function addToHistory() {
     newHistoryItem.innerHTML = `${currentNumber.innerHTML} ${mathSign.innerHTML} ${previousNumber.innerHTML} = ${result}`;
     newHistoryItem.classList.add('history-item');
     calculatorHistory.appendChild(newHistoryItem);
+}
 
+function clearOperation() {
+    previousNumber.innerHTML = '';
+    currentNumber.innerHTML = '';
+    mathSign.innerHTML = '';
 }
 
 function clearHistory() {
@@ -88,23 +77,15 @@ function clearHistory() {
     }
 }
 
-function clearScreen() {
-    result = '';
-    currentNumber.innerHTML = '';
-    previousNumber.innerHTML = '';
-    mathSign.innerHTML = '';
-}
+// Nasluchiwanie
+buttonEquals.addEventListener('click', showResult);
 
+buttonHistory.addEventListener('click', clearHistory);
+buttonClear.addEventListener('click', clearOperation);
 
-
-//Nasłuchiwanie przycisków
-
-operatorsButtons.forEach((button) => button.addEventListener('click', operate));
-equalsButton.addEventListener('click', showResult);
-clearButton.addEventListener('click', clearScreen);
-
-numbersButtons.forEach((button) => {
+buttonsNumber.forEach((button) => {
     button.addEventListener('click', displayNumbers);
 });
-
-historyBtn.addEventListener('click', clearHistory);
+buttonsOperator.forEach((button) => {
+    button.addEventListener('click', operate);
+});
